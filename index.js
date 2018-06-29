@@ -1,5 +1,6 @@
 /* SCRIPT BY SHINO */
 /* Usable Sysbols ◎●←↑→↓↖↗↘↙ */
+// 汉化 by Yuyuko
 
 const Command = require('command');
 const Vec3 = require('tera-vec3');
@@ -10,44 +11,44 @@ const BossID = [1000, 2000, 3000]; 				// Add in Boss Template ID [ 1st boss , 2
 												// Ex. [735, 0] [0, 0, 3000];
 
 const FirstBossActions = {						// First Boss Attack Actions Input here with desired call out Messages
-	1189020954: {msg: 'Incoming Summon'},		// Actions placed here are universal and will be called out disregard to your class or job
-	1189020760: {msg: 'BACK ATTACK'},
-	1189021759: {msg: 'BACK ATTACK'},
-	1189021760: {msg: 'BACK ATTACK'},
-	1189020759: {msg: 'BACK ATTACK'},
-	1189020952: {msg: 'GET OUT ↓'},
-	1189020953: {msg: 'GET IN ↑'},
-	1189020756: {msg: 'GET OUT ↓'},
-	1189021756: {msg: 'GET OUT ↓'},
-	1189020957: {msg: 'ROCKET!'},
-	1189020955: {msg: 'PULL'},
+	1189020954: {msg: 'BOSS 召唤地雷！<br>快打！'},		// Actions placed here are universal and will be called out disregard to your class or job
+	1189020760: {msg: 'BOSS 攻击身后！<br>打手请注意'},
+	1189021759: {msg: 'BOSS 攻击身后！<br>打手请注意'},
+	1189021760: {msg: 'BOSS 攻击身后！<br>打手请注意'},
+	1189020759: {msg: 'BOSS 攻击身后！<br>打手请注意'},
+	1189020952: {msg: '出去 ↓'},
+	1189020953: {msg: '进入 ↑'},
+	1189020756: {msg: '出去 ↓'},
+	1189021756: {msg: '出去 ↓'},
+	1189020957: {msg: '开始发射导弹4次后！<br>看到JUMP提示，马上跳！'},
+	1189020955: {msg: 'BOSS 拉人，注意无敌躲避！'},
 };
 
 const FirstBossActionsTank = {					// First Boss Actions call out for TANKS
-	1189020752: {msg: 'Dodge Stun'},			// Actions will only be called out if you have TANK MODE Enabled
-	1189021752: {msg: 'Dodge Stun'},
+	1189020752: {msg: 'BOSS 眩晕攻击!坦克注意！'},			// Actions will only be called out if you have TANK MODE Enabled
+	1189021752: {msg: 'BOSS 眩晕攻击!坦克注意！'},
 };
 
 const SecondBossActions = {						// Second Boss Attack Actions
-	1189020952: {msg: 'GET OUT ↓'},
+	1189020952: {msg: '出去 ↓'},
 };
 
 const SecondBossActionsTank = {					// Second Boss Actions for TANKS
-	1189020750: {msg: 'FRONT DODGE'},
-	1189021750: {msg: 'FRONT DODGE'},
+	1189020750: {msg: '前砸！注意躲避！'},
+	1189021750: {msg: '前砸！注意躲避！'},
 };
 
 const ThirdBossActions = {						// Third Boss Attack Actions
-	1189020969: {msg: 'SHIELD!'},
-	1189020972: {msg: 'GET OUT ↓'},
-	1189020764: {msg: 'RIGHT →↘'},
-	1189021764: {msg: 'RIGHT →↘'},
-	1189020767: {msg: 'RIGHT →↘'},
-	1189021767: {msg: 'RIGHT →↘'},
-	1189020765: {msg: 'LEFT ←↙'},
-	1189021765: {msg: 'LEFT ←↙'},
-	1189020766: {msg: 'LEFT ←↙'},
-	1189021766: {msg: 'LEFT ←↙'},
+	1189020969: {msg: 'BOSS护盾 快打，不然灭团!'},
+	1189020972: {msg: '出去  ↓'},
+	1189020764: {msg: 'S拳秒杀躲避 右边 →↘'},
+	1189021764: {msg: 'S拳秒杀躲避 右边 →↘'},
+	1189020767: {msg: 'S拳秒杀躲避 右边 →↘'},
+	1189021767: {msg: 'S拳秒杀躲避 右边 →↘'},
+	1189020765: {msg: 'S拳秒杀躲避 左边 ←↙'},
+	1189021765: {msg: 'S拳秒杀躲避 左边 ←↙'},
+	1189020766: {msg: 'S拳秒杀躲避 左边 ←↙'},
+	1189021766: {msg: 'S拳秒杀躲避 左边 ←↙'},
 };
 
 const ThirdBossActionsTank = {					// Third Boss Actions for TANKS
@@ -57,59 +58,59 @@ const ThirdBossActionsTank = {					// Third Boss Actions for TANKS
 //FOR HARD MODE INPUT BELOW HERE//
 
 const FirstBossActionsHM = {
-	1202128154: {msg: 'Incoming Summon'},
-	1202127960: {msg: 'BACK ATTACK'},
-	1202128960: {msg: 'BACK ATTACK'},
-	1202127959: {msg: 'BACK ATTACK'},
-	1202128959: {msg: 'BACK ATTACK'},
-	1202128152: {msg: 'GET OUT ↓'},
-	1202128153: {msg: 'GET IN ↑'},
-	1202127956: {msg: 'GET OUT ↓'},
-	1202128956: {msg: 'GET OUT ↓'},
-	1202128157: {msg: 'ROCKET!'},
-	1202128155: {msg: 'PULL'},
-	1202128053: {msg: 'Wind'},
-	1202128167: {msg: 'Safe front right ↑↗'},
-	1202128163: {msg: 'Safe front right ↑↗'},
-	1202129167: {msg: 'Safe front right ↑↗'},
-	1202129163: {msg: 'Safe front right ↑↗'},
-	1202128174: {msg: 'Safe front left ↑↖'},
-	1202128162: {msg: 'Safe front left ↑↖'},
-	1202129174: {msg: 'Safe front left ↑↖'},
-	1202129162: {msg: 'Safe front left ↑↖'},
-	1202128172: {msg: 'Safe right back →↘'},
-	1202129172: {msg: 'Safe right back →↘'},
-	1202128160: {msg: 'Safe right back →↘'},
-	1202129160: {msg: 'Safe right back →↘'}, 
-	1202128159: {msg: 'Safe right front →↗'},
-	1202129159: {msg: 'Safe right front →↗'},
-	1202128171: {msg: 'Safe right front →↗'},
-	1202129171: {msg: 'Safe right front →↗'},
-	1202128173: {msg: 'Safe left back ←↙'},
-	1202129173: {msg: 'Safe left back ←↙'},
-	1202128165: {msg: 'Safe left back ←↙'},
-	1202129165: {msg: 'Safe left back ←↙'},
-	1202128166: {msg: 'Safe left front ←↖'},
-	1202129166: {msg: 'Safe left front ←↖'},
-	1202128170: {msg: 'Safe left front ←↖'},
-	1202129170: {msg: 'Safe left front ←↖'},
-	1202128169: {msg: 'Safe back left ↓↙'},
-	1202129169: {msg: 'Safe back left ↓↙'},
-	1202128161: {msg: 'Safe back left ↓↙'},
-	1202129161: {msg: 'Safe back left ↓↙'},
-	1202128164: {msg: 'Safe back right ↓↘'},
-	1202129164: {msg: 'Safe back right ↓↘'},
-	1202128168: {msg: 'Safe back right ↓↘'},
-	1202129168: {msg: 'Safe back right ↓↘'},	
+	1202128154: {msg: 'BOSS召唤炸弹，快打！'},
+	1202127960: {msg: 'BOSS 攻击身后！<br>打手请注意'},
+	1202128960: {msg: 'BOSS 攻击身后！<br>打手请注意'},
+	1202127959: {msg: 'BOSS 攻击身后！<br>打手请注意'},
+	1202128959: {msg: 'BOSS 攻击身后！<br>打手请注意'},
+	1202128152: {msg: '出去  ↓'},
+	1202128153: {msg: '进去  ↑'},
+	1202127956: {msg: '出去  ↓'},
+	1202128956: {msg: '出去  ↓'},
+	1202128157: {msg: '开始发射导弹4次后！<br>看到JUMP提示，马上跳！'},
+	1202128155: {msg: 'BOSS 拉人，注意无敌躲避！'},
+	1202128053: {msg: '即将开启通风系统，请离开中间'},
+	1202128167: {msg: '安全区域 右前方 ↑↗'},
+	1202128163: {msg: '安全区域 右前方 ↑↗'},
+	1202129167: {msg: '安全区域 右前方 ↑↗'},
+	1202129163: {msg: '安全区域 右前方 ↑↗'},
+	1202128174: {msg: '安全区域 左前方 ↑↖'},
+	1202128162: {msg: '安全区域 左前方 ↑↖'},
+	1202129174: {msg: '安全区域 左前方 ↑↖'},
+	1202129162: {msg: '安全区域 左前方 ↑↖'},
+	1202128172: {msg: '安全区域 右后方 →↘'},
+	1202129172: {msg: '安全区域 右后方 →↘'},
+	1202128160: {msg: '安全区域 右后方 →↘'},
+	1202129160: {msg: '安全区域 右后方 →↘'}, 
+	1202128159: {msg: '安全区域 右前方 →↗'},
+	1202129159: {msg: '安全区域 右前方 →↗'},
+	1202128171: {msg: '安全区域 右前方 →↗'},
+	1202129171: {msg: '安全区域 右前方 →↗'},
+	1202128173: {msg: '安全区域 左后方 ←↙'},
+	1202129173: {msg: '安全区域 左后方 ←↙'},
+	1202128165: {msg: '安全区域 左后方 ←↙'},
+	1202129165: {msg: '安全区域 左后方 ←↙'},
+	1202128166: {msg: '安全区域 左前方 ←↖'},
+	1202129166: {msg: '安全区域 左前方 ←↖'},
+	1202128170: {msg: '安全区域 左前方 ←↖'},
+	1202129170: {msg: '安全区域 左前方 ←↖'},
+	1202128169: {msg: '安全区域 左后方 ↓↙'},
+	1202129169: {msg: '安全区域 左后方 ↓↙'},
+	1202128161: {msg: '安全区域 左后方 ↓↙'},
+	1202129161: {msg: '安全区域 左后方 ↓↙'},
+	1202128164: {msg: '安全区域 右后方 ↓↘'},
+	1202129164: {msg: '安全区域 右后方 ↓↘'},
+	1202128168: {msg: '安全区域 右后方 ↓↘'},
+	1202129168: {msg: '安全区域 右后方 ↓↘'},	
 };
 
 const FirstBossActionsTankHM = {
-	1202127952: {msg: 'Dodge Stun'},
-	1202128952: {msg: 'Dodge Stun'},
+	1202127952: {msg: 'BOSS 眩晕攻击!坦克注意！'},
+	1202128952: {msg: 'BOSS 眩晕攻击!坦克注意！'},
 };
 
 const SecondBossActionsHM = {
-	1202128152: {msg: 'GET OUT ↓'},
+	1202128152: {msg: '出去 ↓'},
 };
 
 const SecondBossActionsTankHM = {
@@ -117,16 +118,16 @@ const SecondBossActionsTankHM = {
 };
 
 const ThirdBossActionsHM = {
-	1202128169: {msg: 'SHIELD!'},
-	1202128172: {msg: 'GET OUT ↓'},
-	1202127964: {msg: 'RIGHT →↘'},
-	1202128964: {msg: 'RIGHT →↘'},
-	1202127967: {msg: 'RIGHT →↘'},
-	1202128967: {msg: 'RIGHT →↘'},
-	1202127965: {msg: 'LEFT ←↙'},
-	1202128965: {msg: 'LEFT ←↙'},
-	1202127966: {msg: 'LEFT ←↙'},
-	1202128966: {msg: 'LEFT ←↙'},
+	1202128169: {msg: 'BOSS护盾 快打，不然灭团!'},
+	1202128172: {msg: '出去 ↓'},
+	1202127964: {msg: 'S拳秒杀躲避 右边 →↘'},
+	1202128964: {msg: 'S拳秒杀躲避 右边 →↘'},
+	1202127967: {msg: 'S拳秒杀躲避 右边 →↘'},
+	1202128967: {msg: 'S拳秒杀躲避 右边 →↘'},
+	1202127965: {msg: 'S拳秒杀躲避 左边 ←↙'},
+	1202128965: {msg: 'S拳秒杀躲避 左边 ←↙'},
+	1202127966: {msg: 'S拳秒杀躲避 左边 ←↙'},
+	1202128966: {msg: 'S拳秒杀躲避 左边 ←↙'},
 	//1202128153: {msg: 'action'},
 };
 
@@ -140,8 +141,7 @@ module.exports = function rk9guidewrap(dispatch) {
     else
         rk9guide(dispatch);
 }
-	
-	
+
 function rk9guide(dispatch) {
 	const command = Command(dispatch);
 	let firstskill = 0,
@@ -186,14 +186,14 @@ function rk9guide(dispatch) {
 			whichmode = 1; //1 = NM
 			dungeonmode();
 			initialize();
-			command.message('<br> Welcome to RK-9 Normal Mode <br> Type !help for more info <br>');
+			command.message('<br> 欢迎来到 RK-9 普通模式 <br> 录入 !help 获取更多信息 <br>');
 			return;
 			} else if (zone === mapID[1]) {
 			insidemap = true;
 			whichmode = 2; //2 = HM
 			dungeonmode();
 			initialize();
-			command.message('<br> Welcome to RK-9 Hard Mode <br> Type !help for more info <br>');
+			command.message('<br> 欢迎来到 RK-9 困难模式 <br> 录入 !help 获取更多信息 <br>');
 			return;
 			} else insidemap = false;
     });
@@ -212,14 +212,14 @@ function rk9guide(dispatch) {
 			whichmode = 1; //1 = NM
 			dungeonmode();
 			initialize();
-			command.message('<br> Welcome to RK-9 Normal Mode <br> Type !help for more info <br>');
+			command.message('<br> 欢迎来到 RK-9 普通模式 <br> 录入 !help 获取更多信息 <br>');
 			return;
 			} else if (zone === mapID[1]) {
 			insidemap = true;
 			whichmode = 2; //2 = HM
 			dungeonmode();
 			initialize();
-			command.message('<br> Welcome to RK-9 Hard Mode <br> Type !help for more info <br>');
+			command.message('<br> 欢迎来到 RK-9 困难模式 <br> 录入 !help 获取更多信息 <br>');
 			return;
 			} else insidemap = false;
 		}, 15000);
@@ -227,43 +227,43 @@ function rk9guide(dispatch) {
 	
 	//For Inputting commands, Toggle functions ETC 
 	command.add('rk9', () => {
-		if(!insidemap) { command.message('You must be inside RK-9'); return; }
+		if(!insidemap) { command.message('只能在 RK-9 副本内启动'); return; }
 		enabled = !enabled;
 		command.message('RK-9 Guide '+(enabled ? 'Enabled' : 'Disabled') + '.');
 	});
 	
 	command.add('party', () => {
-		if(!insidemap) { command.message('You must be inside RK-9'); return; }
+		if(!insidemap) { command.message('只能在 RK-9 副本内启动'); return; }
 		sendToParty = !sendToParty;
-		command.message((sendToParty ? 'Messages will be sent to the party' : 'Only you will see messages'));
+		command.message((sendToParty ? '信息将会被发送到组队频道' : '只有你可以看见信息'));
 	});
 	
 	command.add('stream', () => {
-		if(!insidemap) { command.message('You must be inside RK-9'); return; }
+		if(!insidemap) { command.message('只能在 RK-9 副本内启动'); return; }
 		streamenabled = !streamenabled;
-		command.message((streamenabled ? 'Stream mode Enabled' : 'Stream mode Disabled'));
+		command.message((streamenabled ? '直播模式开启' : '直播模式关闭'));
 	});
 	
 	command.add('lastbosstoparty', () => {
-		if(!insidemap) { command.message('You must be inside RK-9'); return; }
+		if(!insidemap) { command.message('只能在 RK-9 副本内启动'); return; }
 		lastbosstoparty = !lastbosstoparty;
-		command.message((lastbosstoparty ? 'Messages will be sent to the party' : 'Only you will see messages'));
+		command.message((lastbosstoparty ? '信息将会被发送到组队频道' : '只有你可以看见信息'));
 	});
 	
 	command.add('itemhelper', () => {
-		if(!insidemap) { command.message('You must be inside RK-9'); return; }
+		if(!insidemap) { command.message('只能在 RK-9 副本内启动'); return; }
 		itemhelper = !itemhelper;
 		command.message('Item helper spawn ' + (itemhelper ? 'Enabled' : 'Disabled') + '.');
 	});
 	
 	command.add('tank', () => {
-		if(!insidemap) { command.message('You must be inside RK-9'); return; }
+		if(!insidemap) { command.message('只能在 RK-9 副本内启动'); return; }
 		isTank = !isTank;
 		command.message('Tank Mode ' + (isTank ? 'Enabled' : 'Disabled') + '.');
 	});
 	
 	command.add('info', () => {
-		if(!insidemap) { command.message('You must be inside RK-9'); return; }
+		if(!insidemap) { command.message('只能在 RK-9 副本内启动'); return; }
 		command.message(mode);
 		command.message('RK9 Guide: ' + enabled);
 		command.message('Party Notice: ' + sendToParty);
@@ -274,18 +274,18 @@ function rk9guide(dispatch) {
 	});
 	
 	command.add('help', () => {
-		if(!insidemap) { command.message('You must be inside RK-9'); return; }
-		command.message('!rk9 to toggle module');
-		command.message('!party to toggle party call outs');
-		command.message('!lastbosstoparty to toggle lastboss protocol callouts');
-		command.message('!itemhelper to toggle item spawn on ground');
-		command.message('!info to show which module is Enabled or Disabled');
-		command.message('!tank to manually toggle Tank Mode');
-		command.message('!stream to toggle stream mode');
+		if(!insidemap) { command.message('只能在 RK-9 副本内启动'); return; }
+		command.message('!rk9 启动rk9战斗提示模式');
+		command.message('!party 在队伍中发送提示');
+		command.message('!lastbosstoparty 将尾王内外技能提示发送到队伍频道');
+		command.message('!itemhelper 物品掉落提示');
+		command.message('!info 显示各项设置状态');
+		command.message('!tank 切换至坦克模式');
+		command.message('!stream 切换到直播模式（看不见鲜花和屏幕中间文字提示）');
 	});
 	
 	command.add('debug', () => {
-		if(!insidemap) { command.message('You must be inside RK-9'); return; }
+		if(!insidemap) { command.message('只能在 RK-9 副本内启动'); return; }
 		command.message('InsideZone: ' + insidezone);
 		command.message('InsideMap: ' + insidemap);
 		command.message('Whichmode: ' + whichmode);
@@ -399,7 +399,7 @@ function rk9guide(dispatch) {
 				boss = event.id;
 				if(bosshp <= 0.70 && !warned) {
 					warned = true;
-					sendMessage('Boss 70%');
+					sendMessage('<font color="#FFFF00" size="50">' + 'Boss 70%'+ '</font>');
 				}
 				return;
 			} else return false;
@@ -412,28 +412,28 @@ function rk9guide(dispatch) {
 		if(msgId === 9935311) { //STANDARD
 			firstskill = tempskill;
 			secondskill = 0;
-			sendMessage ('Next: ' + firstskill + ' + ' + secondskill); 
+			sendMessage ('<font color="#FFFF00" size="50">' + 'Next: ' + firstskill + ' + ' + secondskill+ '</font>'); 
 		} else if (msgId === 9935312) { //REVERSE
 			secondskill = tempskill;
 			firstskill = 0;
-			sendMessage ('Next: ' + firstskill + ' + ' + secondskill); 
+			sendMessage ('<font color="#FFFF00" size="50">' + 'Next: ' + firstskill + ' + ' + secondskill+ '</font>'); 
 		}
 		if(!checklastboss) return;
 		if (msgId === 9935302) {
-			firstskill = 'OUT';
-			tempskill = 'OUT';
+			firstskill = '站外面';
+			tempskill = '站外面';
 			checklastboss = false;
-			if(lastbosstoparty) {setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: 'OUT' });}, 3000); }
+			if(lastbosstoparty) {setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: '外' });}, 3000); }
 		} else if (msgId === 9935303) {
-			firstskill = 'IN';
-			tempskill = 'IN';
+			firstskill = '站里面';
+			tempskill = '站里面';
 			checklastboss = false;
-			if(lastbosstoparty) { setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: 'IN' });}, 3000); }
+			if(lastbosstoparty) { setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: '内' });}, 3000); }
 		} else if (msgId === 9935304) {
-			firstskill = 'WAVE';
-			tempskill = 'WAVE';
+			firstskill = '冲击波';
+			tempskill = '冲击波';
 			checklastboss = false;
-			if(lastbosstoparty) {setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: 'WAVE' });}, 3000); }
+			if(lastbosstoparty) {setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: '全' });}, 3000); }
 		}
 	})
 	
@@ -443,49 +443,49 @@ function rk9guide(dispatch) {
 			dungeonmsg = parseInt(event.message.replace('@monsterBehavior:', ''));
 			if ( firstskill === 0 ) { //REVERSE
 				if(dungeonmsg === 935301) {
-					firstskill = 'OUT';
-					tempskill = 'OUT';
-					sendMessage(firstskill + ' + ' + secondskill);
+					firstskill = '站外面';
+					tempskill = '站外面';
+					sendMessage('<font color="#FFFF00" size="50">' + firstskill + ' + ' + secondskill + '</font>');
 					secondskill = tempskill;
 					firstskill = 0;
-					if(lastbosstoparty) {setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: 'OUT' });}, 8000); }
+					if(lastbosstoparty) {setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: '外' });}, 8000); }
 				} else if(dungeonmsg === 935302) {
-					firstskill = 'IN';
-					tempskill = 'IN';
-					sendMessage(firstskill + ' + ' + secondskill);
+					firstskill = '站里面';
+					tempskill = '站里面';
+					sendMessage('<font color="#FFFF00" size="50">' + firstskill + ' + ' + secondskill + '</font>');
 					secondskill = tempskill;
 					firstskill = 0;
-					if(lastbosstoparty) { setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: 'IN' });}, 8000); }
+					if(lastbosstoparty) { setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: '内' });}, 8000); }
 				} else if(dungeonmsg === 935303) {
-					firstskill = 'WAVE';
-					tempskill = 'WAVE';
-					sendMessage(firstskill + ' + ' + secondskill);
+					firstskill = '冲击波';
+					tempskill = '冲击波';
+					sendMessage('<font color="#FFFF00" size="50">' + firstskill + ' + ' + secondskill + '</font>');
 					secondskill = tempskill;
 					firstskill = 0;
-					if(lastbosstoparty) {setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: 'WAVE' });}, 8000); }
+					if(lastbosstoparty) {setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: '全' });}, 8000); }
 				}	
 			} else if ( secondskill === 0 ) { //STANDARD
 				if(dungeonmsg === 935301) {
-					secondskill = 'OUT';
-					tempskill = 'OUT';
-					sendMessage(firstskill + ' + ' + secondskill);
+					secondskill = '站外面';
+					tempskill = '站外面';
+					sendMessage('<font color="#FFFF00" size="50">' + firstskill + ' + ' + secondskill + '</font>');
 					firstskill = tempskill;
 					secondskill = 0;
-					if(lastbosstoparty) {setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: 'OUT' });}, 8000); }
+					if(lastbosstoparty) {setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: '外' });}, 8000); }
 				} else if(dungeonmsg === 935302) {
-					secondskill = 'IN';
-					tempskill = 'IN';
-					sendMessage(firstskill + ' + ' + secondskill);
+					secondskill = '站里面';
+					tempskill = '站里面';
+					sendMessage('<font color="#FFFF00" size="50">' + firstskill + ' + ' + secondskill + '</font>');
 					firstskill = tempskill;
 					secondskill = 0;
-					if(lastbosstoparty) { setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: 'IN' });}, 8000); }
+					if(lastbosstoparty) { setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: '内' });}, 8000); }
 				} else if(dungeonmsg === 935303) {
-					secondskill = 'WAVE';
-					tempskill = 'WAVE';
-					sendMessage(firstskill + ' + ' + secondskill);
+					secondskill = '冲击波';
+					tempskill = '冲击波';
+					sendMessage('<font color="#FFFF00" size="50">' + firstskill + ' + ' + secondskill + '</font>');
 					firstskill = tempskill;
 					secondskill = 0;
-					if(lastbosstoparty) {setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: 'WAVE' });}, 8000); }
+					if(lastbosstoparty) {setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: '全' });}, 8000); }
 				}
 			}
 			return;
@@ -493,8 +493,8 @@ function rk9guide(dispatch) {
 		return;
 	 });
 	 
-	 dispatch.hook('S_ACTION_STAGE', dispatch.base.majorPatchVersion < 74 ? 4 : 7, (event) => {								// DO NOT EDIT IF UN-SURE
-		 if(!enabled) return;																								// Main script for calling out attacks
+	 dispatch.hook('S_ACTION_STAGE', dispatch.base.majorPatchVersion < 74 ? 4 : 7, (event) => {				// DO NOT EDIT IF UN-SURE
+		 if(!enabled) return;																				// Main script for calling out attacks
 		 if(insidezone && insidemap) {
 			bossCurLocation = {x: event.loc.x,y: event.loc.y,z: event.loc.z,w: event.w};
 			let skillid = event.skill;
@@ -510,42 +510,42 @@ function rk9guide(dispatch) {
 			if(whichmode === 1) {
 				if(whichboss === 1) {
 						if (FirstBossActions[skillid]) {
-							sendMessage(FirstBossActions[skillid].msg);
+							sendMessage('<font color="#FFFF00" size="50">' + FirstBossActions[skillid].msg + '</font>');
 						}
 						if(isTank)
 						{
 							if (FirstBossActionsTank[skillid]) {
-							sendMessage(FirstBossActionsTank[skillid].msg);
+							sendMessage('<font color="#FFFF00" size="50">' + FirstBossActionsTank[skillid].msg + '</font>');
 							}
 						}
 						if(skillid == 1189020957)
 						{
 							setTimeout(function(){
-							sendMessage('JUMP!');
+							sendMessage('<font color="#FFFF00" size="50">' + 'JUMP!' + '</font>');
 						}, 12000); }
 				} else if (whichboss === 2) {
 						if (SecondBossActions[skillid]) {
-							sendMessage(SecondBossActions[skillid].msg);
+							sendMessage('<font color="#FFFF00" size="50">' + SecondBossActions[skillid].msg + '</font>');
 						}
 						if(isTank)
 						{
 							if (SecondBossActionsTank[skillid]) {
-							sendMessage(SecondBossActionsTank[skillid].msg);
+							sendMessage('<font color="#FFFF00" size="50">' + SecondBossActionsTank[skillid].msg + '</font>');
 							}
 						}
 				} else if (whichboss === 3) {
 						if (ThirdBossActions[skillid]) {
-							sendMessage(ThirdBossActions[skillid].msg);
+							sendMessage('<font color="#FFFF00" size="50">' + ThirdBossActions[skillid].msg + '</font>');
 						}
 						if(isTank)
 						{
 							if (ThirdBossActionsTank[skillid]) {
-							sendMessage(ThirdBossActionsTank[skillid].msg);
+							sendMessage('<font color="#FFFF00" size="50">' + ThirdBossActionsTank[skillid].msg + '</font>');
 							}
 						}
 						if(skillid == 1189020969) {
 							shieldwarning = setTimeout(function(){
-							sendMessage('SHIELD COMING IN 10SEC');
+							sendMessage('<font color="#FFFF00" size="50">' + 'BOSS将会在10S内出护盾' + '</font>');
 							}, 90000);
 						}
 						if(itemhelper && !streamenabled) {
@@ -567,42 +567,42 @@ function rk9guide(dispatch) {
 		} else if (whichmode === 2) { //HARD MODE
 			if(whichboss === 1) {
 					if (FirstBossActionsHM[skillid]) {
-						sendMessage(FirstBossActionsHM[skillid].msg);
+						sendMessage('<font color="#FFFF00" size="50">' + FirstBossActionsHM[skillid].msg + '</font>');
 					}
 					if(isTank)
 					{
 						if (FirstBossActionsTankHM[skillid]) {
-						sendMessage(FirstBossActionsTankHM[skillid].msg);
+						sendMessage('<font color="#FFFF00" size="50">' + FirstBossActionsTankHM[skillid].msg + '</font>');
 						}
 					}
 					if(skillid == 1202128157)
 					{
 					setTimeout(function(){
-						sendMessage('JUMP!');
+						sendMessage('<font color="#FFFF00" size="50">' + 'JUMP!' + '</font>');
 					}, 12000); }
 			} else if (whichboss === 2) {
 					if (SecondBossActionsHM[skillid]) {
-						sendMessage(SecondBossActionsHM[skillid].msg);
+						sendMessage('<font color="#FFFF00" size="50">' + SecondBossActionsHM[skillid].msg + '</font>');
 					}
 					if(isTank)
 					{
 						if (SecondBossActionsTankHM[skillid]) {
-						sendMessage(SecondBossActionsTankHM[skillid].msg);
+						sendMessage('<font color="#FFFF00" size="50">' + SecondBossActionsTankHM[skillid].msg + '</font>');
 						}
 					}
 			} else if (whichboss === 3) {
 					if (ThirdBossActionsHM[skillid]) {
-						sendMessage(ThirdBossActionsHM[skillid].msg);
+						sendMessage('<font color="#FFFF00" size="50">' + ThirdBossActionsHM[skillid].msg + '</font>');
 					}
 					if(isTank)
 					{
 						if (ThirdBossActionsTankHM[skillid]) {
-						sendMessage(ThirdBossActionsTankHM[skillid].msg);
+						sendMessage('<font color="#FFFF00" size="50">' + ThirdBossActionsTankHM[skillid].msg + '</font>');
 						}
 					}
 					if(skillid == 1202128169) {
 						shieldwarning = setTimeout(function(){
-						sendMessage('SHIELD COMING IN 10SEC');
+						sendMessage('<font color="#FFFF00" size="50">' + 'BOSS将会在10S内出护盾' + '</font>');
 						}, 105000);
 					}
 					if(itemhelper && !streamenabled) {
@@ -639,7 +639,7 @@ function rk9guide(dispatch) {
 						Spawnitem(603, 7000, 340, 300);
 						Spawnitem(603, 7000, 360, 300);
 						setTimeout(function(){
-						sendMessage('Next: '  + firstskill + ' + ' + secondskill);
+						sendMessage('<font color="#FFFF00" size="50">' + 'Next: '  + firstskill + ' + ' + secondskill + '</font>');
 						}, 5500);
 					}
 					}
@@ -806,22 +806,28 @@ function rk9guide(dispatch) {
 });
 
 	 function sendMessage(msg) {
-			if (sendToParty) {
-			dispatch.toServer('C_CHAT', 1, {
-				channel: 21, //21 = p-notice, 1 = party, 2 = guild
-				message: msg
-			});
-		} else if(streamenabled) {
-			command.message(msg);
-		} else {
-			dispatch.toClient('S_CHAT', 2, {
-				channel: 21, //21 = p-notice, 1 = party
-				authorName: 'DG-Guide',
-				message: msg
-			});
-		}
-	
-	}
+        if (sendToParty) {
+            dispatch.toServer('C_CHAT', 1, {
+                channel: 21, //21 = p-notice, 1 = party, 2 = guild
+                message: msg
+            });
+            dispatch.toClient('S_DUNGEON_EVENT_MESSAGE', 2, {
+                type: 42,
+                chat: 0,
+                channel: 27,
+                message: msg
+            });
+        } else if(streamenabled) {
+            command.message(msg);
+        } else {
+            dispatch.toClient('S_DUNGEON_EVENT_MESSAGE', 2, {
+                type: 42,
+                chat: 0,
+                channel: 27,
+                message: msg
+            });
+        }
+    }
 
 	function dungeonmode() {
 		if(whichmode === 1) mode = 'NORMAL MODE'
@@ -977,7 +983,7 @@ function rk9guide(dispatch) {
 	{
 		if(insidezone && insidemap && event.channel === 21 && event.authorID.notEquals(cid))
 		{
-			event.channel = 1
+			event.channel = 1  //21 = p-notice, 1 = party
 			return true
 		}
 	})
