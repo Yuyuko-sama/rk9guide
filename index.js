@@ -808,7 +808,7 @@ function rk9guide(dispatch) {
 	 function sendMessage(msg) {
         if (sendToParty) {
             dispatch.toServer('C_CHAT', 1, {
-                channel: 21, //21 = p-notice, 1 = party, 2 = guild
+                channel: 1, //21 = p-notice, 1 = party, 2 = guild
                 message: msg
             });
             dispatch.toClient('S_DUNGEON_EVENT_MESSAGE', 2, {
