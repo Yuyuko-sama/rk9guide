@@ -158,7 +158,6 @@ function rk9guide(dispatch) {
 		bosshp,
 		model,
 		zone,
-		location,
 		mode,
 		dungeonmsg,
 		job = -1,
@@ -294,11 +293,7 @@ function rk9guide(dispatch) {
 		command.message('Itemhelper: ' + itemhelper);
 		command.message('KR: ' + kr);
 	});
-	
-	dispatch.hook('C_PLAYER_LOCATION', 5, (event) => {
-        location = event;
-    });
-	
+
 	// NEED MORE TESTING 
 	// FOR WARRIOR / ZERK TANK MODE
 	/*dispatch.hook('S_ABNORMALITY_BEGIN', 2, (event) => {
@@ -975,7 +970,7 @@ function rk9guide(dispatch) {
 	function Despawn(uid){
 	dispatch.toClient('S_DESPAWN_COLLECTION', 2, {
 			gameId : uid,
-			collected : 0
+			collected : false
 		});
 	}
 	

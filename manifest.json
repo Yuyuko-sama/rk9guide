@@ -1,14 +1,13 @@
 {
 	"files": {
 		"README.md": "99463d07d369ae12564c0c7324c80c5dd27d0df47859e664ef1aedad488ba5cb",
-		"index.js": "ce41956a908137b4d1e1922b9e3e32968a23bd53984314e654f0af0b034343f0",
+		"index.js": "f1a6b7679be953ddff30b3c6846f9207eee5de657b1bafe995b429985ad8cfe8",
 		"module.json": "a4f3cd8a5ac4a99a10c8357ee8adf43b1850cd115c1b91057bc6efb988b7df90"
 	},
 	"defs": {
 		"C_ASK_INTERACTIVE": 2,
 		"C_CHAT": 1,
 		"C_CHECK_VERSION": 1,
-		"C_PLAYER_LOCATION": 5,
 		"S_ACTION_STAGE": [7,8],
 		"S_BOSS_GAGE_INFO": 3,
 		"S_CHAT": 2,
