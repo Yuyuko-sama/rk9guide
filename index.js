@@ -394,7 +394,7 @@ function rk9guide(dispatch) {
 				boss = event.id;
 				if(bosshp <= 0.70 && !warned) {
 					warned = true;
-					sendMessage('<font color="#FFFF00" size="50">' + 'Boss 70%'+ '</font>');
+					sendMessage('<font color="#FFFF00" size="32">' + 'Boss 70%'+ '</font>');
 				}
 				return;
 			} else return false;
@@ -407,11 +407,11 @@ function rk9guide(dispatch) {
 		if(msgId === 9935311) { //STANDARD
 			firstskill = tempskill;
 			secondskill = 0;
-			sendMessage ('<font color="#FFFF00" size="50">' + 'Next: ' + firstskill + ' + ' + secondskill+ '</font>'); 
+			sendMessage ('<font color="#FFFF00" size="32">' + 'Next: ' + firstskill + ' + ' + secondskill+ '</font>'); 
 		} else if (msgId === 9935312) { //REVERSE
 			secondskill = tempskill;
 			firstskill = 0;
-			sendMessage ('<font color="#FFFF00" size="50">' + 'Next: ' + firstskill + ' + ' + secondskill+ '</font>'); 
+			sendMessage ('<font color="#FFFF00" size="32">' + 'Next: ' + firstskill + ' + ' + secondskill+ '</font>'); 
 		}
 		if(!checklastboss) return;
 		if (msgId === 9935302) {
@@ -440,21 +440,21 @@ function rk9guide(dispatch) {
 				if(dungeonmsg === 935301) {
 					firstskill = '站外面';
 					tempskill = '站外面';
-					sendMessage('<font color="#FFFF00" size="50">' + firstskill + ' + ' + secondskill + '</font>');
+					sendMessage('<font color="#FFFF00" size="32">' + firstskill + ' + ' + secondskill + '</font>');
 					secondskill = tempskill;
 					firstskill = 0;
 					if(lastbosstoparty) {setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: '外' });}, 8000); }
 				} else if(dungeonmsg === 935302) {
 					firstskill = '站里面';
 					tempskill = '站里面';
-					sendMessage('<font color="#FFFF00" size="50">' + firstskill + ' + ' + secondskill + '</font>');
+					sendMessage('<font color="#FFFF00" size="32">' + firstskill + ' + ' + secondskill + '</font>');
 					secondskill = tempskill;
 					firstskill = 0;
 					if(lastbosstoparty) { setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: '内' });}, 8000); }
 				} else if(dungeonmsg === 935303) {
 					firstskill = '冲击波';
 					tempskill = '冲击波';
-					sendMessage('<font color="#FFFF00" size="50">' + firstskill + ' + ' + secondskill + '</font>');
+					sendMessage('<font color="#FFFF00" size="32">' + firstskill + ' + ' + secondskill + '</font>');
 					secondskill = tempskill;
 					firstskill = 0;
 					if(lastbosstoparty) {setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: '全' });}, 8000); }
@@ -463,21 +463,21 @@ function rk9guide(dispatch) {
 				if(dungeonmsg === 935301) {
 					secondskill = '站外面';
 					tempskill = '站外面';
-					sendMessage('<font color="#FFFF00" size="50">' + firstskill + ' + ' + secondskill + '</font>');
+					sendMessage('<font color="#FFFF00" size="32">' + firstskill + ' + ' + secondskill + '</font>');
 					firstskill = tempskill;
 					secondskill = 0;
 					if(lastbosstoparty) {setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: '外' });}, 8000); }
 				} else if(dungeonmsg === 935302) {
 					secondskill = '站里面';
 					tempskill = '站里面';
-					sendMessage('<font color="#FFFF00" size="50">' + firstskill + ' + ' + secondskill + '</font>');
+					sendMessage('<font color="#FFFF00" size="32">' + firstskill + ' + ' + secondskill + '</font>');
 					firstskill = tempskill;
 					secondskill = 0;
 					if(lastbosstoparty) { setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: '内' });}, 8000); }
 				} else if(dungeonmsg === 935303) {
 					secondskill = '冲击波';
 					tempskill = '冲击波';
-					sendMessage('<font color="#FFFF00" size="50">' + firstskill + ' + ' + secondskill + '</font>');
+					sendMessage('<font color="#FFFF00" size="32">' + firstskill + ' + ' + secondskill + '</font>');
 					firstskill = tempskill;
 					secondskill = 0;
 					if(lastbosstoparty) {setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: '全' });}, 8000); }
@@ -505,42 +505,42 @@ function rk9guide(dispatch) {
 			if(whichmode === 1) {
 				if(whichboss === 1) {
 						if (FirstBossActions[skillid]) {
-							sendMessage('<font color="#FFFF00" size="50">' + FirstBossActions[skillid].msg + '</font>');
+							sendMessage('<font color="#FFFF00" size="32">' + FirstBossActions[skillid].msg + '</font>');
 						}
 						if(isTank)
 						{
 							if (FirstBossActionsTank[skillid]) {
-							sendMessage('<font color="#FFFF00" size="50">' + FirstBossActionsTank[skillid].msg + '</font>');
+							sendMessage('<font color="#FFFF00" size="32">' + FirstBossActionsTank[skillid].msg + '</font>');
 							}
 						}
 						if(skillid == 1189020957)
 						{
 							setTimeout(function(){
-							sendMessage('<font color="#FFFF00" size="50">' + 'JUMP!' + '</font>');
+							sendMessage('<font color="#FFFF00" size="32">' + 'JUMP!' + '</font>');
 						}, 12000); }
 				} else if (whichboss === 2) {
 						if (SecondBossActions[skillid]) {
-							sendMessage('<font color="#FFFF00" size="50">' + SecondBossActions[skillid].msg + '</font>');
+							sendMessage('<font color="#FFFF00" size="32">' + SecondBossActions[skillid].msg + '</font>');
 						}
 						if(isTank)
 						{
 							if (SecondBossActionsTank[skillid]) {
-							sendMessage('<font color="#FFFF00" size="50">' + SecondBossActionsTank[skillid].msg + '</font>');
+							sendMessage('<font color="#FFFF00" size="32">' + SecondBossActionsTank[skillid].msg + '</font>');
 							}
 						}
 				} else if (whichboss === 3) {
 						if (ThirdBossActions[skillid]) {
-							sendMessage('<font color="#FFFF00" size="50">' + ThirdBossActions[skillid].msg + '</font>');
+							sendMessage('<font color="#FFFF00" size="32">' + ThirdBossActions[skillid].msg + '</font>');
 						}
 						if(isTank)
 						{
 							if (ThirdBossActionsTank[skillid]) {
-							sendMessage('<font color="#FFFF00" size="50">' + ThirdBossActionsTank[skillid].msg + '</font>');
+							sendMessage('<font color="#FFFF00" size="32">' + ThirdBossActionsTank[skillid].msg + '</font>');
 							}
 						}
 						if(skillid == 1189020969) {
 							shieldwarning = setTimeout(function(){
-							sendMessage('<font color="#FFFF00" size="50">' + 'BOSS将会在10S内出护盾' + '</font>');
+							sendMessage('<font color="#FFFF00" size="32">' + 'BOSS将会在10S内出护盾' + '</font>');
 							}, 90000);
 						}
 						if(itemhelper && !streamenabled) {
@@ -562,42 +562,42 @@ function rk9guide(dispatch) {
 		} else if (whichmode === 2) { //HARD MODE
 			if(whichboss === 1) {
 					if (FirstBossActionsHM[skillid]) {
-						sendMessage('<font color="#FFFF00" size="50">' + FirstBossActionsHM[skillid].msg + '</font>');
+						sendMessage('<font color="#FFFF00" size="32">' + FirstBossActionsHM[skillid].msg + '</font>');
 					}
 					if(isTank)
 					{
 						if (FirstBossActionsTankHM[skillid]) {
-						sendMessage('<font color="#FFFF00" size="50">' + FirstBossActionsTankHM[skillid].msg + '</font>');
+						sendMessage('<font color="#FFFF00" size="32">' + FirstBossActionsTankHM[skillid].msg + '</font>');
 						}
 					}
 					if(skillid == 1202128157)
 					{
 					setTimeout(function(){
-						sendMessage('<font color="#FFFF00" size="50">' + 'JUMP!' + '</font>');
+						sendMessage('<font color="#FFFF00" size="32">' + 'JUMP!' + '</font>');
 					}, 12000); }
 			} else if (whichboss === 2) {
 					if (SecondBossActionsHM[skillid]) {
-						sendMessage('<font color="#FFFF00" size="50">' + SecondBossActionsHM[skillid].msg + '</font>');
+						sendMessage('<font color="#FFFF00" size="32">' + SecondBossActionsHM[skillid].msg + '</font>');
 					}
 					if(isTank)
 					{
 						if (SecondBossActionsTankHM[skillid]) {
-						sendMessage('<font color="#FFFF00" size="50">' + SecondBossActionsTankHM[skillid].msg + '</font>');
+						sendMessage('<font color="#FFFF00" size="32">' + SecondBossActionsTankHM[skillid].msg + '</font>');
 						}
 					}
 			} else if (whichboss === 3) {
 					if (ThirdBossActionsHM[skillid]) {
-						sendMessage('<font color="#FFFF00" size="50">' + ThirdBossActionsHM[skillid].msg + '</font>');
+						sendMessage('<font color="#FFFF00" size="32">' + ThirdBossActionsHM[skillid].msg + '</font>');
 					}
 					if(isTank)
 					{
 						if (ThirdBossActionsTankHM[skillid]) {
-						sendMessage('<font color="#FFFF00" size="50">' + ThirdBossActionsTankHM[skillid].msg + '</font>');
+						sendMessage('<font color="#FFFF00" size="32">' + ThirdBossActionsTankHM[skillid].msg + '</font>');
 						}
 					}
 					if(skillid == 1202128169) {
 						shieldwarning = setTimeout(function(){
-						sendMessage('<font color="#FFFF00" size="50">' + 'BOSS将会在10S内出护盾' + '</font>');
+						sendMessage('<font color="#FFFF00" size="32">' + 'BOSS将会在10S内出护盾' + '</font>');
 						}, 105000);
 					}
 					if(itemhelper && !streamenabled) {
@@ -634,7 +634,7 @@ function rk9guide(dispatch) {
 						Spawnitem(603, 7000, 340, 300);
 						Spawnitem(603, 7000, 360, 300);
 						setTimeout(function(){
-						sendMessage('<font color="#FFFF00" size="50">' + 'Next: '  + firstskill + ' + ' + secondskill + '</font>');
+						sendMessage('<font color="#FFFF00" size="32">' + 'Next: '  + firstskill + ' + ' + secondskill + '</font>');
 						}, 5500);
 					}
 					}
