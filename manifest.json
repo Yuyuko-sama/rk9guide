@@ -1,7 +1,7 @@
 {
 	"files": {
 		"README.md": "99463d07d369ae12564c0c7324c80c5dd27d0df47859e664ef1aedad488ba5cb",
-		"index.js": "417415db6ff89587708e06bb2d2df7c23d52910e8c19bdedfced8eef1e0e010a",
+		"index.js": "17e28a062f26f114dd2e7d8908a7484c12338d1a0e9192bd238ea903d1046bc6",
 		"module.json": "a4f3cd8a5ac4a99a10c8357ee8adf43b1850cd115c1b91057bc6efb988b7df90"
 	},
 	"defs": {
@@ -17,6 +17,6 @@
 		"S_LOGIN": 10,
 		"S_QUEST_BALLOON": 1,
 		"S_SPAWN_COLLECTION": 4,
-		"S_SPAWN_NPC": 9
+		"S_SPAWN_NPC": 10
 	}
 }
