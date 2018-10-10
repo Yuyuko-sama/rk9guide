@@ -315,7 +315,7 @@ function rk9guide(dispatch) {
 		}
 	});*/
 	
-	dispatch.hook('S_SPAWN_NPC', 9, (event) => {
+	dispatch.hook('S_SPAWN_NPC', 10, (event) => {
 		if(!enabled) return;
 		if(!itemhelper || streamenabled) return;
 		if(insidemap && insidezone) {
