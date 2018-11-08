@@ -2,7 +2,6 @@
 /* Usable Sysbols ◎●←↑→↓↖↗↘↙ */
 // 汉化 by Yuyuko
 
-const Command = require('command');
 const Vec3 = require('tera-vec3');
 const mapID = [9735, 9935];						// MAP ID to input [ Normal Mode , Hard Mode ]
 const HuntingZn = [735, 935]; 					// Add in your own Hunting Zone [ Normal Mode , Hard Mode ] 
@@ -135,15 +134,14 @@ const ThirdBossActionsTankHM = {
 	
 };
 
-module.exports = function rk9guidewrap(dispatch) {
-	if(!dispatch.base.protocolVersion)
-        dispatch.hook('C_CHECK_VERSION', 1, (event) => { rk9guide(dispatch); });
+module.exports = function rk9guidewrap(mod) {
+	if(!mod.base.protocolVersion)
+        mod.hook('C_CHECK_VERSION', 1, (event) => { rk9guide(mod); });
     else
-        rk9guide(dispatch);
+        rk9guide(mod);
 }
 
-function rk9guide(dispatch) {
-	const command = Command(dispatch);
+function rk9guide(mod) {
 	let firstskill = 0,
 		secondskill = 0,
 		tempskill = 0,
@@ -177,7 +175,7 @@ function rk9guide(dispatch) {
 		itemhelper = true;
 		
 	// DO NOT EDIT IF UN-SURE
-	dispatch.hook('S_LOAD_TOPO', 3, (event) => {				// Welcome Message upon entering dungeon
+	mod.hook('S_LOAD_TOPO', 3, (event) => {				// Welcome Message upon entering dungeon
         zone = event.zone;										// Edit Message if neccessary
 	clearTimeout(shieldwarning);
 		if (zone === mapID[0]) {								
@@ -185,24 +183,24 @@ function rk9guide(dispatch) {
 			whichmode = 1; //1 = NM
 			dungeonmode();
 			initialize();
-			command.message('<br> 欢迎来到 RK-9 普通模式 <br> 录入 !help 获取更多信息 <br>');
+			mod.command.message('<br> 欢迎来到 RK-9 普通模式 <br> 录入 !help 获取更多信息 <br>');
 			return;
 			} else if (zone === mapID[1]) {
 			insidemap = true;
 			whichmode = 2; //2 = HM
 			dungeonmode();
 			initialize();
-			command.message('<br> 欢迎来到 RK-9 困难模式 <br> 录入 !help 获取更多信息 <br>');
+			mod.command.message('<br> 欢迎来到 RK-9 困难模式 <br> 录入 !help 获取更多信息 <br>');
 			return;
 			} else insidemap = false;
     });
 	
-	dispatch.hook('S_LOGIN', 10, (event) => {
+	mod.hook('S_LOGIN', 10, (event) => {
 		cid = event.gameId;
 		model = event.templateId;
 		name = event.name;
 		job = model % 100
-		if(kr === null) kr = (dispatch.base.majorPatchVersion < 74) ? false : true;
+		if(kr === null) kr = (mod.base.majorPatchVersion < 74) ? false : true;
 		if (job === 2 || job === 11) isTank = true;				// Check if class = Lancer / Brawler
 		else isTank = false;
 		setTimeout(function(){
@@ -211,111 +209,111 @@ function rk9guide(dispatch) {
 			whichmode = 1; //1 = NM
 			dungeonmode();
 			initialize();
-			command.message('<br> 欢迎来到 RK-9 普通模式 <br> 录入 !help 获取更多信息 <br>');
+			mod.command.message('<br> 欢迎来到 RK-9 普通模式 <br> 录入 !help 获取更多信息 <br>');
 			return;
 			} else if (zone === mapID[1]) {
 			insidemap = true;
 			whichmode = 2; //2 = HM
 			dungeonmode();
 			initialize();
-			command.message('<br> 欢迎来到 RK-9 困难模式 <br> 录入 !help 获取更多信息 <br>');
+			mod.command.message('<br> 欢迎来到 RK-9 困难模式 <br> 录入 !help 获取更多信息 <br>');
 			return;
 			} else insidemap = false;
 		}, 15000);
 	});
 	
 	//For Inputting commands, Toggle functions ETC 
-	command.add('rk9', () => {
-		if(!insidemap) { command.message('只能在 RK-9 副本内启动'); return; }
+	mod.command.add('rk9', () => {
+		if(!insidemap) { mod.command.message('只能在 RK-9 副本内启动'); return; }
 		enabled = !enabled;
-		command.message('RK-9 Guide '+(enabled ? 'Enabled' : 'Disabled') + '.');
+		mod.command.message('RK-9 Guide '+(enabled ? 'Enabled' : 'Disabled') + '.');
 	});
 	
-	command.add('party', () => {
-		if(!insidemap) { command.message('只能在 RK-9 副本内启动'); return; }
+	mod.command.add('party', () => {
+		if(!insidemap) { mod.command.message('只能在 RK-9 副本内启动'); return; }
 		sendToParty = !sendToParty;
-		command.message((sendToParty ? '信息将会被发送到组队频道' : '只有你可以看见信息'));
+		mod.command.message((sendToParty ? '信息将会被发送到组队频道' : '只有你可以看见信息'));
 	});
 	
-	command.add('stream', () => {
-		if(!insidemap) { command.message('只能在 RK-9 副本内启动'); return; }
+	mod.command.add('stream', () => {
+		if(!insidemap) { mod.command.message('只能在 RK-9 副本内启动'); return; }
 		streamenabled = !streamenabled;
-		command.message((streamenabled ? '直播模式开启' : '直播模式关闭'));
+		mod.command.message((streamenabled ? '直播模式开启' : '直播模式关闭'));
 	});
 	
-	command.add('lastbosstoparty', () => {
-		if(!insidemap) { command.message('只能在 RK-9 副本内启动'); return; }
+	mod.command.add('lastbosstoparty', () => {
+		if(!insidemap) { mod.command.message('只能在 RK-9 副本内启动'); return; }
 		lastbosstoparty = !lastbosstoparty;
-		command.message((lastbosstoparty ? '信息将会被发送到组队频道' : '只有你可以看见信息'));
+		mod.command.message((lastbosstoparty ? '信息将会被发送到组队频道' : '只有你可以看见信息'));
 	});
 	
-	command.add('itemhelper', () => {
-		if(!insidemap) { command.message('只能在 RK-9 副本内启动'); return; }
+	mod.command.add('itemhelper', () => {
+		if(!insidemap) { mod.command.message('只能在 RK-9 副本内启动'); return; }
 		itemhelper = !itemhelper;
-		command.message('Item helper spawn ' + (itemhelper ? 'Enabled' : 'Disabled') + '.');
+		mod.command.message('Item helper spawn ' + (itemhelper ? 'Enabled' : 'Disabled') + '.');
 	});
 	
-	command.add('tank', () => {
-		if(!insidemap) { command.message('只能在 RK-9 副本内启动'); return; }
+	mod.command.add('tank', () => {
+		if(!insidemap) { mod.command.message('只能在 RK-9 副本内启动'); return; }
 		isTank = !isTank;
-		command.message('Tank Mode ' + (isTank ? 'Enabled' : 'Disabled') + '.');
+		mod.command.message('Tank Mode ' + (isTank ? 'Enabled' : 'Disabled') + '.');
 	});
 	
-	command.add('info', () => {
-		if(!insidemap) { command.message('只能在 RK-9 副本内启动'); return; }
-		command.message(mode);
-		command.message('RK9 Guide: ' + enabled);
-		command.message('Party Notice: ' + sendToParty);
-		command.message('Lastboss to party notice: ' + lastbosstoparty);
-		command.message('Item helper: ' + itemhelper);
-		command.message('Tank Mode: ' + isTank);
-		command.message('Stream mode: ' + streamenabled);
+	mod.command.add('info', () => {
+		if(!insidemap) { mod.command.message('只能在 RK-9 副本内启动'); return; }
+		mod.command.message(mode);
+		mod.command.message('RK9 Guide: ' + enabled);
+		mod.command.message('Party Notice: ' + sendToParty);
+		mod.command.message('Lastboss to party notice: ' + lastbosstoparty);
+		mod.command.message('Item helper: ' + itemhelper);
+		mod.command.message('Tank Mode: ' + isTank);
+		mod.command.message('Stream mode: ' + streamenabled);
 	});
 	
-	command.add('help', () => {
-		if(!insidemap) { command.message('只能在 RK-9 副本内启动'); return; }
-		command.message('!rk9 启动rk9战斗提示模式');
-		command.message('!party 在队伍中发送提示');
-		command.message('!lastbosstoparty 将尾王内外技能提示发送到队伍频道');
-		command.message('!itemhelper 物品掉落提示');
-		command.message('!info 显示各项设置状态');
-		command.message('!tank 切换至坦克模式');
-		command.message('!stream 切换到直播模式（看不见鲜花和屏幕中间文字提示）');
+	mod.command.add('help', () => {
+		if(!insidemap) { mod.command.message('只能在 RK-9 副本内启动'); return; }
+		mod.command.message('!rk9 启动rk9战斗提示模式');
+		mod.command.message('!party 在队伍中发送提示');
+		mod.command.message('!lastbosstoparty 将尾王内外技能提示发送到队伍频道');
+		mod.command.message('!itemhelper 物品掉落提示');
+		mod.command.message('!info 显示各项设置状态');
+		mod.command.message('!tank 切换至坦克模式');
+		mod.command.message('!stream 切换到直播模式（看不见鲜花和屏幕中间文字提示）');
 	});
 	
-	command.add('debug', () => {
-		if(!insidemap) { command.message('只能在 RK-9 副本内启动'); return; }
-		command.message('InsideZone: ' + insidezone);
-		command.message('InsideMap: ' + insidemap);
-		command.message('Whichmode: ' + whichmode);
-		command.message('WhichBoss: ' + whichboss);
-		command.message('IsInv: ' + isInv);
-		command.message('Itemhelper: ' + itemhelper);
-		command.message('KR: ' + kr);
+	mod.command.add('debug', () => {
+		if(!insidemap) { mod.command.message('只能在 RK-9 副本内启动'); return; }
+		mod.command.message('InsideZone: ' + insidezone);
+		mod.command.message('InsideMap: ' + insidemap);
+		mod.command.message('Whichmode: ' + whichmode);
+		mod.command.message('WhichBoss: ' + whichboss);
+		mod.command.message('IsInv: ' + isInv);
+		mod.command.message('Itemhelper: ' + itemhelper);
+		mod.command.message('KR: ' + kr);
 	});
 
 	// NEED MORE TESTING 
 	// FOR WARRIOR / ZERK TANK MODE
-	/*dispatch.hook('S_ABNORMALITY_BEGIN', 2, (event) => {
+	/*mod.hook('S_ABNORMALITY_BEGIN', 2, (event) => {
 		if (!enabled) return;
 		if(job === 1 || job === 2 || job === 4 || job === 11) {
 		if(event.id === 100200 || event.id === 100202 || event.id === 100203) {
 			isTank = true;
-			command.message('Tank Mode: ' + isTank);
+			mod.command.message('Tank Mode: ' + isTank);
 		}
 		}
 	});
-	dispatch.hook('S_ABNORMALITY_END', 1, event => {
+	mod.hook('S_ABNORMALITY_END', 1, event => {
 		if (!enabled) return;
 		if(job === 1 || job === 2 || job === 4 || job === 11) {
 		if(event.id === 100200 || event.id === 100202 || event.id === 100203) {
 			isTank = false;
-			command.message('Tank Mode: ' + isTank);
+			mod.command.message('Tank Mode: ' + isTank);
 		}
 		}
 	});*/
 	
-	dispatch.hook('S_SPAWN_NPC', 10, (event) => {
+	mod.hook('S_SPAWN_NPC', 10, (event) => {
 		if(!enabled) return;
 		if(!itemhelper || streamenabled) return;
 		if(insidemap && insidezone) {
@@ -347,7 +345,7 @@ function rk9guide(dispatch) {
 		}
 	})
 	
-	dispatch.hook('S_BOSS_GAGE_INFO', 3, (event) => {					// DO NOT EDIT IF UN-SURE
+	mod.hook('S_BOSS_GAGE_INFO', 3, (event) => {					// DO NOT EDIT IF UN-SURE
 		if (!enabled) return;
 		bosshp = event.curHp / event.maxHp;
 		if(bosshp === 1) {
@@ -401,7 +399,7 @@ function rk9guide(dispatch) {
 		} else insidezone = false;
 		})
 	 
-	 	dispatch.hook('S_DUNGEON_EVENT_MESSAGE', 2, (event) => {	
+	 	mod.hook('S_DUNGEON_EVENT_MESSAGE', 2, (event) => {	
 		if (!enabled || whichboss === 0) return;
 		let msgId = parseInt(event.message.replace('@dungeon:', ''));
 		if(msgId === 9935311) { //STANDARD
@@ -418,21 +416,21 @@ function rk9guide(dispatch) {
 			firstskill = '站外面';
 			tempskill = '站外面';
 			checklastboss = false;
-			if(lastbosstoparty) {setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: '外' });}, 3000); }
+			if(lastbosstoparty) {setTimeout(function(){mod.send('C_CHAT', 1, {channel: 21, message: '外' });}, 3000); }
 		} else if (msgId === 9935303) {
 			firstskill = '站里面';
 			tempskill = '站里面';
 			checklastboss = false;
-			if(lastbosstoparty) { setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: '内' });}, 3000); }
+			if(lastbosstoparty) { setTimeout(function(){mod.send('C_CHAT', 1, {channel: 21, message: '内' });}, 3000); }
 		} else if (msgId === 9935304) {
 			firstskill = '冲击波';
 			tempskill = '冲击波';
 			checklastboss = false;
-			if(lastbosstoparty) {setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: '全' });}, 3000); }
+			if(lastbosstoparty) {setTimeout(function(){mod.send('C_CHAT', 1, {channel: 21, message: '全' });}, 3000); }
 		}
 	})
 	
-	 dispatch.hook('S_QUEST_BALLOON', 1, (event) => {
+	 mod.hook('S_QUEST_BALLOON', 1, (event) => {
 		if(!enabled) return;
 		if(insidezone && insidemap) {
 			dungeonmsg = parseInt(event.message.replace('@monsterBehavior:', ''));
@@ -443,21 +441,21 @@ function rk9guide(dispatch) {
 					sendMessage('<font color="#FFFF00" size="32">' + firstskill + ' + ' + secondskill + '</font>');
 					secondskill = tempskill;
 					firstskill = 0;
-					if(lastbosstoparty) {setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: '外' });}, 8000); }
+					if(lastbosstoparty) {setTimeout(function(){mod.send('C_CHAT', 1, {channel: 21, message: '外' });}, 8000); }
 				} else if(dungeonmsg === 935302) {
 					firstskill = '站里面';
 					tempskill = '站里面';
 					sendMessage('<font color="#FFFF00" size="32">' + firstskill + ' + ' + secondskill + '</font>');
 					secondskill = tempskill;
 					firstskill = 0;
-					if(lastbosstoparty) { setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: '内' });}, 8000); }
+					if(lastbosstoparty) { setTimeout(function(){mod.send('C_CHAT', 1, {channel: 21, message: '内' });}, 8000); }
 				} else if(dungeonmsg === 935303) {
 					firstskill = '冲击波';
 					tempskill = '冲击波';
 					sendMessage('<font color="#FFFF00" size="32">' + firstskill + ' + ' + secondskill + '</font>');
 					secondskill = tempskill;
 					firstskill = 0;
-					if(lastbosstoparty) {setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: '全' });}, 8000); }
+					if(lastbosstoparty) {setTimeout(function(){mod.send('C_CHAT', 1, {channel: 21, message: '全' });}, 8000); }
 				}	
 			} else if ( secondskill === 0 ) { //STANDARD
 				if(dungeonmsg === 935301) {
@@ -466,21 +464,21 @@ function rk9guide(dispatch) {
 					sendMessage('<font color="#FFFF00" size="32">' + firstskill + ' + ' + secondskill + '</font>');
 					firstskill = tempskill;
 					secondskill = 0;
-					if(lastbosstoparty) {setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: '外' });}, 8000); }
+					if(lastbosstoparty) {setTimeout(function(){mod.send('C_CHAT', 1, {channel: 21, message: '外' });}, 8000); }
 				} else if(dungeonmsg === 935302) {
 					secondskill = '站里面';
 					tempskill = '站里面';
 					sendMessage('<font color="#FFFF00" size="32">' + firstskill + ' + ' + secondskill + '</font>');
 					firstskill = tempskill;
 					secondskill = 0;
-					if(lastbosstoparty) { setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: '内' });}, 8000); }
+					if(lastbosstoparty) { setTimeout(function(){mod.send('C_CHAT', 1, {channel: 21, message: '内' });}, 8000); }
 				} else if(dungeonmsg === 935303) {
 					secondskill = '冲击波';
 					tempskill = '冲击波';
 					sendMessage('<font color="#FFFF00" size="32">' + firstskill + ' + ' + secondskill + '</font>');
 					firstskill = tempskill;
 					secondskill = 0;
-					if(lastbosstoparty) {setTimeout(function(){dispatch.toServer('C_CHAT', 1, {channel: 21, message: '全' });}, 8000); }
+					if(lastbosstoparty) {setTimeout(function(){mod.send('C_CHAT', 1, {channel: 21, message: '全' });}, 8000); }
 				}
 			}
 			return;
@@ -488,7 +486,7 @@ function rk9guide(dispatch) {
 		return;
 	 });
 	 
-	 dispatch.hook('S_ACTION_STAGE', dispatch.base.majorPatchVersion >= 75 ? 8 : 7, (event) => {				// DO NOT EDIT IF UN-SURE
+	 mod.hook('S_ACTION_STAGE', mod.base.majorPatchVersion >= 75 ? 8 : 7, (event) => {				// DO NOT EDIT IF UN-SURE
 		 if(!enabled) return;																				// Main script for calling out attacks
 		 if(insidezone && insidemap) {
 			bossCurLocation = {x: event.loc.x,y: event.loc.y,z: event.loc.z,w: event.w};
@@ -802,20 +800,20 @@ function rk9guide(dispatch) {
 
 	 function sendMessage(msg) {
         if (sendToParty) {
-            dispatch.toServer('C_CHAT', 1, {
+            mod.send('C_CHAT', 1, {
                 channel: 1, //21 = p-notice, 1 = party, 2 = guild
                 message: msg
             });
-            dispatch.toClient('S_DUNGEON_EVENT_MESSAGE', 2, {
+            mod.send('S_DUNGEON_EVENT_MESSAGE', 2, {
                 type: 42,
                 chat: 0,
                 channel: 27,
                 message: msg
             });
         } else if(streamenabled) {
-            command.message(msg);
+            mod.command.message(msg);
         } else {
-            dispatch.toClient('S_DUNGEON_EVENT_MESSAGE', 2, {
+            mod.send('S_DUNGEON_EVENT_MESSAGE', 2, {
                 type: 42,
                 chat: 0,
                 channel: 27,
@@ -849,7 +847,7 @@ function rk9guide(dispatch) {
 		spawny = loca.loc.y + radius * Math.sin(finalrad);
 		pos = {x:spawnx,y:spawny};
 		
-		dispatch.toClient('S_SPAWN_COLLECTION', 4, {
+		mod.send('S_SPAWN_COLLECTION', 4, {
 			gameId : uid,
 			id : item,
 			amount : 1,
@@ -871,7 +869,7 @@ function rk9guide(dispatch) {
 		spawny = bossCurLocation.y + radius * Math.sin(finalrad);
 		pos = {x:spawnx,y:spawny};
 		
-		dispatch.toClient('S_SPAWN_COLLECTION', 4, {
+		mod.send('S_SPAWN_COLLECTION', 4, {
 			gameId : uid,
 			id : item,
 			amount : 1,
@@ -968,13 +966,13 @@ function rk9guide(dispatch) {
 	}
 	
 	function Despawn(uid){
-	dispatch.toClient('S_DESPAWN_COLLECTION', 2, {
+	mod.send('S_DESPAWN_COLLECTION', 2, {
 			gameId : uid,
 			collected : false
 		});
 	}
 	
-	dispatch.hook('S_CHAT', 2, event =>
+	mod.hook('S_CHAT', 2, event =>
 	{
 		if(insidezone && insidemap && event.channel === 21 && event.authorID.notEquals(cid))
 		{
@@ -982,7 +980,7 @@ function rk9guide(dispatch) {
 			return true
 		}
 	})
-	dispatch.hook('C_ASK_INTERACTIVE', 2, event =>
+	mod.hook('C_ASK_INTERACTIVE', 2, event =>
 	{
 		if(event.name === 'DG-Guide') return false
 	})
