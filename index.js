@@ -135,7 +135,7 @@ const ThirdBossActionsTankHM = {
 };
 
 module.exports = function rk9guidewrap(mod) {
-	if(!mod.base.protocolVersion)
+	if(!mod.protocolVersion)
         mod.hook('C_CHECK_VERSION', 1, (event) => { rk9guide(mod); });
     else
         rk9guide(mod);
@@ -200,7 +200,7 @@ function rk9guide(mod) {
 		model = event.templateId;
 		name = event.name;
 		job = model % 100
-		if(kr === null) kr = (mod.base.majorPatchVersion < 74) ? false : true;
+		if(kr === null) kr = (mod.majorPatchVersion < 74) ? false : true;
 		if (job === 2 || job === 11) isTank = true;				// Check if class = Lancer / Brawler
 		else isTank = false;
 		setTimeout(function(){
@@ -486,7 +486,7 @@ function rk9guide(mod) {
 		return;
 	 });
 	 
-	 mod.hook('S_ACTION_STAGE', mod.base.majorPatchVersion >= 75 ? 8 : 7, (event) => {				// DO NOT EDIT IF UN-SURE
+	 mod.hook('S_ACTION_STAGE', mod.majorPatchVersion >= 75 ? 8 : 7, (event) => {				// DO NOT EDIT IF UN-SURE
 		 if(!enabled) return;																				// Main script for calling out attacks
 		 if(insidezone && insidemap) {
 			bossCurLocation = {x: event.loc.x,y: event.loc.y,z: event.loc.z,w: event.w};
