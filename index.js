@@ -135,6 +135,11 @@ const ThirdBossActionsTankHM = {
 };
 
 module.exports = function rk9guidewrap(mod) {
+	if(!mod.protocolVersion)
+        mod.hook('C_CHECK_VERSION', 1, (event) => { rk9guide(mod); });
+    else
+        rk9guide(mod);
+}
 
 function rk9guide(mod) {
 	let firstskill = 0,
