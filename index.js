@@ -347,7 +347,7 @@ function rk9guide(mod) {
 	
 	mod.hook('S_BOSS_GAGE_INFO', 3, (event) => {					// DO NOT EDIT IF UN-SURE
 		if (!enabled) return;
-		bosshp = event.curHp / event.maxHp;
+		bosshp = Number(event.curHp / event.maxHp);
 		if(bosshp === 1) {
 			initialize();	
 		}
