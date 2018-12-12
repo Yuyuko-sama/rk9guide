@@ -150,7 +150,6 @@ module.exports = function rk9guidewrap(mod) {
 		bosshp,
 		model,
 		zone,
-		location,
 		mode,
 		dungeonmsg,
 		job = -1,
@@ -347,8 +346,8 @@ module.exports = function rk9guidewrap(mod) {
 		if(bosshp === 1) {
 			initialize();
 		}
-		if(whichboss != 0) {
-		if (bosshp <= 0)
+		if(whichboss) {
+		if (boss - event.id != 0)
 		{
 			whichboss = 0;
 			warned = false;
@@ -481,20 +480,35 @@ module.exports = function rk9guidewrap(mod) {
 		}
 		return;
 	 });
-	 
-	 mod.hook('S_ACTION_STAGE', 9, (event) => {				// DO NOT EDIT IF UN-SURE
-		 if(!enabled) return;																				// Main script for calling out attacks
+
+	 function newtoold(obj = {}) {
+        if(typeof obj === 'number') obj = {type: 1, id: obj}
+
+		const hasHuntingZone = Boolean(obj.npc) && obj.type == 1
+
+		let raw = (Number(obj.id) || 0) & (hasHuntingZone ? 0xffff : 0x3ffffff)
+		if(hasHuntingZone) raw |= (obj.huntingZoneId & 0x3ff) << 16
+		raw |= (obj.type & 0xf) << 26
+		raw |= (obj.npc & 1) << 30
+		raw |= (obj.reserved & 1) << 31
+
+		return raw
+	}
+	
+	 dispatch.hook('S_ACTION_STAGE', 9, (event) => {								// DO NOT EDIT IF UN-SURE
+		 if(!enabled) return;																								// Main script for calling out attacks
 		 if(insidezone && insidemap) {
 			bossCurLocation = {x: event.loc.x,y: event.loc.y,z: event.loc.z,w: event.w};
-			let skillid = event.skill;
-			if(kr && whichmode === 1) {
+			let skillid = newtoold(event.skill); // there, fixed the guide :ok_hand:
+			//let skillid = event.skill;
+			/*if(kr && whichmode === 1) {
 					if(event.skill.id - 352 >= 1000)	skillid = "118902" + (event.skill.id - 352);
 					else skillid = "1189020" + (event.skill.id - 352);
 			}
 			if(kr && whichmode === 2) {
 			if(event.skill.id + 6848 >= 1000)	skillid = "120212" + (event.skill.id + 6848);
 				else skillid = "1202120" + (event.skill.id + 6848);
-			}
+			}*/
 			if(event.stage === 0) {
 			if(whichmode === 1) {
 				if(whichboss === 1) {
@@ -964,13 +978,13 @@ module.exports = function rk9guidewrap(mod) {
 	function Despawn(uid){
 	mod.send('S_DESPAWN_COLLECTION', 2, {
 			gameId : uid,
-			collected : false
+			collected : 0
 		});
 	}
 	
 	mod.hook('S_CHAT', 2, event =>
 	{
-		if(insidezone && insidemap && event.channel === 21 && event.authorID.notEquals(cid))
+		if(insidezone && insidemap && event.channel === 21 && event.authorID != cid)
 		{
 			event.channel = 1  //21 = p-notice, 1 = party
 			return true
