@@ -135,11 +135,6 @@ const ThirdBossActionsTankHM = {
 };
 
 module.exports = function rk9guidewrap(mod) {
-	if(!mod.protocolVersion)
-        mod.hook('C_CHECK_VERSION', 1, (event) => { rk9guide(mod); });
-    else
-        rk9guide(mod);
-}
 
 function rk9guide(mod) {
 	let firstskill = 0,
@@ -172,6 +167,7 @@ function rk9guide(mod) {
 		enabled = true,
 	   	streamenabled = false,
 	    shieldwarning,
+		bossCurLocation,
 		itemhelper = true;
 		
 	// DO NOT EDIT IF UN-SURE
@@ -489,7 +485,7 @@ function rk9guide(mod) {
 	 mod.hook('S_ACTION_STAGE', 9, (event) => {				// DO NOT EDIT IF UN-SURE
 		 if(!enabled) return;																				// Main script for calling out attacks
 		 if(insidezone && insidemap) {
-			let bossCurLocation = {x: event.loc.x,y: event.loc.y,z: event.loc.z,w: event.w};
+			bossCurLocation = {x: event.loc.x,y: event.loc.y,z: event.loc.z,w: event.w};
 			let skillid = event.skill;
 			if(kr && whichmode === 1) {
 					if(event.skill.id - 352 >= 1000)	skillid = "118902" + (event.skill.id - 352);
