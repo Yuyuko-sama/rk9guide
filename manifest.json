@@ -1,14 +1,14 @@
 {
 	"files": {
 		"README.md": "99463d07d369ae12564c0c7324c80c5dd27d0df47859e664ef1aedad488ba5cb",
-		"index.js": "6c0fd320d5b5c7b9e062217cffea7fae00fe061816f47b97693680ac1e02b485",
+		"index.js": "47c64e507abfd4dd1e79d427e9f8655d9d9e0477a46a5cc06096966aad6fc791",
 		"module.json": "a4f3cd8a5ac4a99a10c8357ee8adf43b1850cd115c1b91057bc6efb988b7df90"
 	},
 	"defs": {
 		"C_ASK_INTERACTIVE": 2,
 		"C_CHAT": 1,
 		"C_CHECK_VERSION": 1,
-		"S_ACTION_STAGE": [7,8],
+		"S_ACTION_STAGE": 9,
 		"S_BOSS_GAGE_INFO": 3,
 		"S_CHAT": 2,
 		"S_DESPAWN_COLLECTION": 2,
