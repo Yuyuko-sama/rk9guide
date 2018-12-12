@@ -495,7 +495,7 @@ module.exports = function rk9guidewrap(mod) {
 		return raw
 	}
 	
-	 dispatch.hook('S_ACTION_STAGE', 9, (event) => {								// DO NOT EDIT IF UN-SURE
+	 mod.hook('S_ACTION_STAGE', 9, (event) => {								// DO NOT EDIT IF UN-SURE
 		 if(!enabled) return;																								// Main script for calling out attacks
 		 if(insidezone && insidemap) {
 			bossCurLocation = {x: event.loc.x,y: event.loc.y,z: event.loc.z,w: event.w};
