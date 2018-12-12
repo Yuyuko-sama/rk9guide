@@ -190,7 +190,7 @@ module.exports = function rk9guidewrap(mod) {
 			} else insidemap = false;
     });
 	
-	mod.hook('S_LOGIN', 11, (event) => {
+	mod.hook('S_LOGIN', mod.majorPatchVersion < 77 ? 11 : 12, (event) => {
 		cid = event.gameId;
 		model = event.templateId;
 		name = event.name;
