@@ -135,13 +135,7 @@ const ThirdBossActionsTankHM = {
 };
 
 module.exports = function rk9guidewrap(mod) {
-	if(!mod.protocolVersion)
-        mod.hook('C_CHECK_VERSION', 1, (event) => { rk9guide(mod); });
-    else
-        rk9guide(mod);
-}
 
-function rk9guide(mod) {
 	let firstskill = 0,
 		secondskill = 0,
 		tempskill = 0,
@@ -156,12 +150,13 @@ function rk9guide(mod) {
 		bosshp,
 		model,
 		zone,
+		location,
 		mode,
 		dungeonmsg,
 		job = -1,
 		whichboss = 0,
 		whichmode = 0,
-		kr = null,
+		//kr = true,
 		isTank = false,
 		warned = false,
 		checklastboss = true,
@@ -171,7 +166,7 @@ function rk9guide(mod) {
 		lastbosstoparty = false,
 		enabled = true,
 	   	streamenabled = false,
-	    shieldwarning,
+		shieldwarning,
 		bossCurLocation,
 		itemhelper = true;
 		
@@ -201,7 +196,7 @@ function rk9guide(mod) {
 		model = event.templateId;
 		name = event.name;
 		job = model % 100
-		if(kr === null) kr = (mod.majorPatchVersion < 74) ? false : true;
+		//if(kr === null) kr = (mod.majorPatchVersion < 74) ? false : true;
 		if (job === 2 || job === 11) isTank = true;				// Check if class = Lancer / Brawler
 		else isTank = false;
 		setTimeout(function(){
@@ -295,7 +290,7 @@ function rk9guide(mod) {
 
 	// NEED MORE TESTING 
 	// FOR WARRIOR / ZERK TANK MODE
-	/*mod.hook('S_ABNORMALITY_BEGIN', 2, (event) => {
+	/*mod.hook('S_ABNORMALITY_BEGIN', 3, (event) => {
 		if (!enabled) return;
 		if(job === 1 || job === 2 || job === 4 || job === 11) {
 		if(event.id === 100200 || event.id === 100202 || event.id === 100203) {
@@ -348,9 +343,9 @@ function rk9guide(mod) {
 	
 	mod.hook('S_BOSS_GAGE_INFO', 3, (event) => {					// DO NOT EDIT IF UN-SURE
 		if (!enabled) return;
-		bosshp = Number(event.curHp / event.maxHp);
+		bosshp = (parseInt(event.curHp) / parseInt(event.maxHp));
 		if(bosshp === 1) {
-			initialize();	
+			initialize();
 		}
 		if(whichboss != 0) {
 		if (bosshp <= 0)
