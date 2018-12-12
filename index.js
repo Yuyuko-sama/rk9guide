@@ -195,7 +195,7 @@ function rk9guide(mod) {
 			} else insidemap = false;
     });
 	
-	mod.hook('S_LOGIN', 10, (event) => {
+	mod.hook('S_LOGIN', 11, (event) => {
 		cid = event.gameId;
 		model = event.templateId;
 		name = event.name;
@@ -486,7 +486,7 @@ function rk9guide(mod) {
 		return;
 	 });
 	 
-	 mod.hook('S_ACTION_STAGE', mod.majorPatchVersion >= 75 ? 8 : 7, (event) => {				// DO NOT EDIT IF UN-SURE
+	 mod.hook('S_ACTION_STAGE', 9, (event) => {				// DO NOT EDIT IF UN-SURE
 		 if(!enabled) return;																				// Main script for calling out attacks
 		 if(insidezone && insidemap) {
 			bossCurLocation = {x: event.loc.x,y: event.loc.y,z: event.loc.z,w: event.w};
