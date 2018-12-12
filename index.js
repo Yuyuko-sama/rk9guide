@@ -489,7 +489,7 @@ function rk9guide(mod) {
 	 mod.hook('S_ACTION_STAGE', 9, (event) => {				// DO NOT EDIT IF UN-SURE
 		 if(!enabled) return;																				// Main script for calling out attacks
 		 if(insidezone && insidemap) {
-			bossCurLocation = {x: event.loc.x,y: event.loc.y,z: event.loc.z,w: event.w};
+			let bossCurLocation = {x: event.loc.x,y: event.loc.y,z: event.loc.z,w: event.w};
 			let skillid = event.skill;
 			if(kr && whichmode === 1) {
 					if(event.skill.id - 352 >= 1000)	skillid = "118902" + (event.skill.id - 352);
