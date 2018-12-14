@@ -553,17 +553,17 @@ module.exports = function rk9guidewrap(mod) {
 						}
 						if(itemhelper && !streamenabled) {
 						if(skillid == 1189020764 || skillid == 1189021764 || skillid == 1189020767 || skillid == 1189021767) {
-							Spawnitem(556, 3000, 190,200);
-							Spawnitem(556, 3000, 10,200);
+							Spawnitem(6, 3000, 190,200);
+							Spawnitem(6, 3000, 10,200);
 						} else if (skillid == 1189020765 || skillid == 1189021765 || skillid == 1189020766 || skillid == 1189021766) {
-							Spawnitem(556, 3000, 170, 200);
-							Spawnitem(556, 3000, 350, 200);
+							Spawnitem(6, 3000, 170, 200);
+							Spawnitem(6, 3000, 350, 200);
 						} else if(skillid == 1202127964 || skillid == 1202128964 || skillid == 1202127967 || skillid == 1202128967) {
-							Spawnitem(556, 3000, 190,200);
-							Spawnitem(556, 3000, 10,200);
+							Spawnitem(6, 3000, 190,200);
+							Spawnitem(6, 3000, 10,200);
 						} else if (skillid == 1202127965 || skillid == 1202128965 || skillid == 1202127966 || skillid == 1202128966) {
-							Spawnitem(556, 3000, 170, 200);
-							Spawnitem(556, 3000, 350, 200);
+							Spawnitem(6, 3000, 170, 200);
+							Spawnitem(6, 3000, 350, 200);
 						}
 						}
 			} else return;
@@ -610,17 +610,17 @@ module.exports = function rk9guidewrap(mod) {
 					}
 					if(itemhelper && !streamenabled) {
 					if(skillid == 1189020764 || skillid == 1189021764 || skillid == 1189020767 || skillid == 1189021767) {
-						Spawnitem(556, 3000, 190,200);
-						Spawnitem(556, 3000, 10,200);
+						Spawnitem(6, 3000, 190,200);
+						Spawnitem(6, 3000, 10,200);
 					} else if (skillid == 1189020765 || skillid == 1189021765 || skillid == 1189020766 || skillid == 1189021766) {
-						Spawnitem(556, 3000, 170, 200);
-						Spawnitem(556, 3000, 350, 200);
+						Spawnitem(6, 3000, 170, 200);
+						Spawnitem(6, 3000, 350, 200);
 					} else if(skillid == 1202127964 || skillid == 1202128964 || skillid == 1202127967 || skillid == 1202128967) {
-						Spawnitem(556, 3000, 190,200);
-						Spawnitem(556, 3000, 10,200);
+						Spawnitem(6, 3000, 190,200);
+						Spawnitem(6, 3000, 10,200);
 					} else if (skillid == 1202127965 || skillid == 1202128965 || skillid == 1202127966 || skillid == 1202128966) {
-						Spawnitem(556, 3000, 170, 200);
-						Spawnitem(556, 3000, 350, 200);
+						Spawnitem(6, 3000, 170, 200);
+						Spawnitem(6, 3000, 350, 200);
 					}
 					if(skillid == 1202128153) {
 						Spawnitem(548, 7000, 20, 300);
