@@ -308,7 +308,7 @@ module.exports = function rk9guidewrap(mod) {
 		}
 	});*/
 	
-	mod.hook('S_SPAWN_NPC', 10, (event) => {
+	mod.hook('S_SPAWN_NPC', 11, (event) => {
 		if(!enabled) return;
 		if(!itemhelper || streamenabled) return;
 		if(insidemap && insidezone) {
